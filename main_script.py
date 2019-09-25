@@ -44,29 +44,32 @@ def update_regimes(social, stimuli, fatigue, activations = None):
 def get_average_emotions(person):
 
 	emotions = {}
-	for key, value in person["face"]["emotions"].items():
-		emotions[key] = (person["text"]["emotions"][key] + value)/2
+	if "text" in person.keys():
+		for key, value in person["face"]["emotions"].items():
+			emotions[key] = (person["text"]["emotions"][key] + value)/2
+	else:
+		emotions = person["face"]["emotions"]
 	
 	return emotions
 
 def print_info(social, stimuli, fatigue, behaviours, appraisal, full = True):
 
 	if not full:
-		print("Emotion: {0}\n Behaviour: {1}".format(appraisal.emotion, behaviours.behaviour))
+		print("Emotion: {0}\nBehaviour: {1}".format(appraisal.emotion, behaviours.behaviour))
 		print("==============")
 	else:
-		print("Social drive: \n", social)
-		print("Stimuli drive: \n", stimuli)
-		print("Fatigue drive: \n", fatigue)
-		print("Appraisal: \n", appraisal)
-		print("Behaviour: \n", behaviours)
-		print("==============")
-		print("Emotion: {0}\n Behaviour: {1}".format(appraisal.emotion, behaviours.behaviour))
+		#print("Social drive:\n", social)
+		#print("Stimuli drive:\n", stimuli)
+		#print("Fatigue drive:\n", fatigue)
+		print("Appraisal:\n", appraisal)
+		#print("Behaviour:\n", behaviours)
+		# print("==============")
+		# print("Emotion: {0}\nBehaviour: {1}".format(appraisal.emotion, behaviours.behaviour))
 		print("==============")
 
 def main():
 
-	vectors, timestamps = read_data("scenarion_happy_sad.json")
+	vectors, timestamps = read_data("scenario_neutral_happy.json") #scenario_happy_sad
 	social, stimuli, fatigue, behaviours, appraisal = create_objects()
 	regimes = update_regimes(social, stimuli, fatigue)
 
@@ -85,7 +88,7 @@ def main():
 
 		regimes = update_regimes(social, stimuli, fatigue, activations)
 
-		print_info(social, stimuli, fatigue, behaviours, appraisal)
+		print_info(social, stimuli, fatigue, behaviours, appraisal, full = True)
 
 if __name__ == '__main__':
 	main()
