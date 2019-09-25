@@ -5,19 +5,20 @@ import json
 
 emotions = {
     "happy":    0, 
-    "sad":  0, 
+    "sad":  	0, 
     "fear":     0, 
     "angry":    0, 
-    "disgust":      0, 
+    "disgust":  0, 
     "surprise": 0, 
     "neutral":  0
 }
 
 data = {}
 timestamp = 1566998321
-for i in range(1, 100):
-    arr = np.array([i,
-                    100 - i,
+count = 100
+for i in range(1, count):
+    arr = np.array([i,			# less prob
+                    count - i,	# high prob
                     np.random.randint(2, size=1),
                     np.random.randint(2, size=1),
                     np.random.randint(2, size=1),
@@ -25,13 +26,13 @@ for i in range(1, 100):
                     np.random.randint(2, size=1)])
     arr = arr/sum(arr)
     emotions = {}
-    emotions["angry"] = arr[0]
-    emotions["happy"] = arr[1]
-    emotions["fear"] = arr[2]
-    emotions["sad"] = arr[3]
-    emotions["disgust"] = arr[4]
-    emotions["surprise"] = arr[5]
-    emotions["neutral"] = arr[6]
+    emotions["happy"] = float(arr[0])     # less prob
+    emotions["neutral"] = float(arr[1])   # high prob
+    emotions["fear"] = float(arr[2])
+    emotions["surprise"] = float(arr[3])
+    emotions["sad"] = float(arr[4])
+    emotions["disgust"] = float(arr[5])
+    emotions["angry"] = float(arr[6])
     #pprint(emotions)
     data[str(datetime.fromtimestamp(timestamp))] = {}
     data[str(datetime.fromtimestamp(timestamp))]["person"] = {}
@@ -44,5 +45,5 @@ for i in range(1, 100):
 
     timestamp += 1
 
-with open("scenario_happy_sad.json", "w") as file:
+with open("scenario_neutral_happy.json", "w") as file:
     json.dump(data, file)

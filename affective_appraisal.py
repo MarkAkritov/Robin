@@ -2,13 +2,15 @@ class Appraisal:
 
 	def __init__(self):
 
-		self.arousal = 0
-		self.valence = 0
-		self.stance  = 0
+		self.arousal = 0	# Level of being awake 
+		self.valence = 0	# Level of being attracted
+		self.stance  = 0	# Level of being open for interaction
 
+		# Range for arousal, valence and stance
 		self.max =  1
 		self.min = -1
 
+		# Initial emotion
 		self.emotion = "Neutral"
 
 	def __repr__(self):
@@ -52,8 +54,8 @@ class Appraisal:
 				AVS[2] -= value
 
 			elif key == "fear":
-				AVS[0] -= value
-				AVS[1] += value
+				AVS[0] += value
+				AVS[1] -= value
 				AVS[2] += value
 
 			elif key == "happy":
@@ -62,18 +64,18 @@ class Appraisal:
 				AVS[2] += value
 
 			elif key == "sad":
-				AVS[0] += value
+				AVS[0] -= value
 				AVS[1] -= value
 				AVS[2] += value
 
 			elif key == "surprise":
 				AVS[0] += value
 				AVS[1] += value
-				#AVS[0] -= value
+				#AVS[2] -= value
 
-			elif key == "disgust":
+			elif key == "neutral":
 				AVS[0] -= value
-				#AVS[0] -= value
+				AVS[1] += value
 				AVS[2] -= value
 
 			else:
@@ -117,6 +119,60 @@ class Appraisal:
 
 		elif self.arousal < -0.5 and self.valence < -0.5 and self.stance < -0.5:
 			self.emotion = "Disgust"
+
+		elif self.arousal < -0.5 and (self.valence <= 0.5 and self.valence >= -0.5) and self.stance < -0.5:
+			self.emotion = "Stern"
+
+		elif self.arousal < -0.5 and self.valence > 0.5 and self.stance < -0.5:
+			self.emotion = "Neutral"
+
+		elif self.arousal < -0.5 and (self.valence <= 0.5 and self.valence >= -0.5) and self.stance > 0.5:
+			self.emotion = "Neutral"
+
+		elif self.arousal > 0.5 and self.valence > 0.5 and self.stance > 0.5:
+			self.emotion = "Happy"
+
+		elif self.arousal > 0.5 and self.valence < -0.5 and self.stance < -0.5:
+			self.emotion = "Fear"
+
+		elif self.arousal > 0.5 and self.valence < -0.5 and (self.stance <= 0.5 and self.stance >= -0.5):
+			self.emotion = "Stern"
+
+		elif self.arousal > 0.5 and (self.valence <= 0.5 and self.valence >= -0.5) and self.stance < -0.5:
+			self.emotion = "Attentive"
+
+		elif self.arousal < -0.5 and self.valence > 0.5 and self.stance > 0.5:
+			self.emotion = "Attentive"
+
+		elif self.arousal < -0.5 and self.valence > 0.5 and (self.stance <= 0.5 and self.stance >= -0.5):
+			self.emotion = "Neutral"
+
+		elif self.arousal < -0.5 and self.valence > 0.5 and self.stance < -0.5:
+			self.emotion = "Tired"
+
+		elif self.arousal > 0.5 and self.valence < -0.5 and self.stance > 0.5:
+			self.emotion = "Attentive"
+
+		elif self.arousal > 0.5 and (self.valence <= 0.5 and self.valence >= -0.5) and self.stance > 0.5:
+			self.emotion = "Sad"
+
+		elif self.arousal > 0.5 and self.valence > 0.5 and (self.stance <= 0.5 and self.stance >= -0.5):
+			self.emotion = "Attentive"
+
+		elif (self.arousal <= 0.5 and self.arousal >= -0.5) and self.valence > 0.5 and self.stance > 0.5:
+			self.emotion = "Surprise"
+
+		elif self.arousal < -0.5 and self.valence < -0.5 and (self.stance <= 0.5 and self.stance >= -0.5):
+			self.emotion = "Stern"
+
+		elif self.arousal < -0.5 and self.valence < -0.5 and self.stance > 0.5:
+			self.emotion = "Sad"
+
+		elif (self.arousal <= 0.5 and self.arousal >= -0.5) and self.valence > 0.5 and self.stance < -0.5:
+			self.emotion = "Attentive"
+
+		elif self.arousal > 0.5 and self.valence > 0.5 and self.stance < -0.5:
+			self.emotion = "Surprise"
 
 		else:
 			self.emotion = "Other"
