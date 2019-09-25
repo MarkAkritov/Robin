@@ -88,7 +88,7 @@ def main():
 
 		regimes = update_regimes(social, stimuli, fatigue, activations)
 
-		print_info(social, stimuli, fatigue, behaviours, appraisal, full = True)
+		print_info(social, stimuli, fatigue, behaviours, appraisal, full = False)
 
 if __name__ == '__main__':
 	main()
