@@ -16,9 +16,9 @@ class Appraisal:
 	def __repr__(self):
 
 		return "Arousal: {0} \nValence: {1} \nStance:  {2} \nEmotion: {3}".format(self.arousal, 
-																				  self.valence, 
-																				  self.stance, 
-																				  self.emotion)
+											  self.valence, 
+											  self.stance, 
+											  self.emotion)
 
 	def set_min_max(self):
 
